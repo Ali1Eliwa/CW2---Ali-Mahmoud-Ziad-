@@ -1,10 +1,10 @@
 # Detailed Design Document
 
-| **Author**              | `Authors Name`                                       |
+| **Author**              | `Ali Akram - Mahmoud Adgham - Ziad Khalil`                                       |
 |:------------------------|:-----------------------------------------------------|
-| **Status**              | `Draft/Inspection/Approved`                          |
+| **Status**              | `Draft`                          |
 | **Version**             | `1.0`                                                |
-| **Date**                | `dd/mm/yyyy`                                         |
+| **Date**                | `13/11/2025`                                         |
 
 ## Introduction
 
