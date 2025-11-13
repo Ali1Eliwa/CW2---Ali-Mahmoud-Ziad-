@@ -17,7 +17,7 @@ This project aims to build a reliable electronic system that uses the UART commu
 
 1. Read and Show Data: The system will constantly take an analog reading (like voltage) using the ADC and show the result on the LCD screen.
 
-2 Allow User Control: The system will watch the KeyPad for button presses, specifically to let the user press a button to send the current reading to the computer.
+2. Allow User Control: The system will watch the KeyPad for button presses, specifically to let the user press a button to send the current reading to the computer.
 
 3. Send Data Out: The system will use UART to dependably send the prepared data to the computer when the user triggers it.
 
@@ -63,14 +63,20 @@ Keypad ..> HW_Defs : Includes
 ```
 
 ### Assumptions & Constraints
-Hardware: The target microcontroller is an AVR ATmega328P operating at a clock speed of 16 MHz.
+### Assumptions
+* **Microcontroller:** The code is written for an **AVR ATmega328P** microcontroller.
+* **System Clock:** The system clock frequency (`F_CPU`) is **16MHz**. This is critical for `_delay_ms()` timing and the ADC prescaler settings.
+* **Hardware Connections:** All components (LCD, LED, Keypad, Potentiometer) are connected to the exact ports and pins defined in `Hardware_Defs.h`.
+* **ADC Configuration:** The ADC is a 10-bit converter (0-1023) using AVcc as its reference voltage.
+* **Keypad Thresholds:** The resistor network for the analog keypad produces ADC values that reliably fall within the thresholds defined in `Hardware_Defs.h`.
+* **Design:** A simple polling "super-loop" design with blocking delays (like `_delay_ms()`) is acceptable for this application's responsiveness needs.
 
-
-Programming Language: The project must be implemented strictly in Native C.
-
-Dependencies: No external libraries or Arduino-specific functions are permitted.
-
-Development Tools: Code must be managed in a Git repository, and this design document must use PlantUML for diagrams.
+### Constraints
+* **Native C:** The application must be written in **Native C**, without using any Arduino-based functions or libraries.
+* **Direct Register Access:** All peripherals (Ports, ADC) must be controlled via direct register manipulation (e.g., `PORTD`, `ADMUX`, `ADCSRA`).
+* **AI Use:** Using AI generative models to write the code is **not permitted**.
+* **Hardware Interface:** The LCD must be driven in **4-bit mode**, and the display is a 16x2 character LCD.
+* **Input Logic:** The high and low limits are controlled using the `KEY_UP` and `KEY_DOWN` buttons, respectively.
 
 ## Functional Description
 The system runs on one continuous, loop that manages all its core activities. This loop has three primary jobs:
