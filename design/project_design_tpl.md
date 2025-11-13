@@ -148,11 +148,20 @@ stop
 ```
 
 ## Implementation of the Module
-We're building this project using a modular design. This means we split the code into logical files to keep everything neat and organized. This approach separates the hardware details from the main program logic.
 
-The system is organized into two main sections (layers):
+The project is broken into several key modules:
 
-Low-Level Drivers (MCAL): This section handles direct communication with the chip's internal parts, like the UART, ADC, and I/O pins (DIO). It gives us a clean way to talk to the hardware.
+* **`HMain_Project.ino`**: Contains the `main()` function, global variables for `high_limit` and `low_limit`, and all high-level application logic.
+* **`adc.ino`**: Implements the ADC driver.
+    * `adc_init()`: Configures the ADC by setting the reference voltage to AVcc and setting the prescaler to 128 for a 125kHz ADC clock.
+    * `adc_read()`: Selects the specified channel, starts a conversion, polls the `ADSC` bit until the conversion is complete, and returns the 10-bit result.
+* **`lcd.ino`**: Implements the 16x2 LCD driver in 4-bit mode.
+    * `lcd_init()`: Performs the required 4-bit initialization sequence.
+    * `lcd_send_nibble()` / `lcd_send_byte()`: Internal helper functions to send 4-bit and 8-bit data, respectively, by manipulating the data and control pins.
+    * `lcd_send_string()`: Iterates through a character pointer and sends each character to the LCD.
+* **`keypad.ino`**: Implements the analog keypad driver.
+    * `get_keypad_press()`: Reads the raw 10-bit ADC value from the keypad channel. It then compares this value against the thresholds defined in `hardware_defs.h` to identify and return the pressed key.
+* **`utils.ino`**: Provides a `simple_itoa()` utility function to convert an integer into a string, which is necessary for displaying numerical values on the LCD.
 
 ## Integration and Configuration
 ### Static Files
