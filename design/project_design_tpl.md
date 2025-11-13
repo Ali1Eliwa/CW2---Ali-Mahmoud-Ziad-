@@ -1,4 +1,4 @@
-# Detailed Design Document
+# Human Machine Interface (HMI) Project Design
 
 | **Author**              | `Ali Akram - Mahmoud Adgham - Ziad Khalil`                                       |
 |:------------------------|:-----------------------------------------------------|
