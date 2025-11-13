@@ -25,10 +25,10 @@ This project aims to build a reliable electronic system that uses the UART commu
 
 According to the project brief and the architectural requirements, this detailed design's scope is limited to two primary use cases that cover data acquisition and user interaction:
 
-Use Case #1: Display and Monitoring
+`Use Case #1`: Display and Monitoring
 The system will continuously acquire and process analog data using the ADC module. It will take the digitized value, format it (e.g., convert to temperature or LDR intensity), and immediately display the result on the LCD 16x2 screen for real-time monitoring by the user. An LED or Buzzer alert will be triggered if the monitored value falls outside the configured High or Low limits.
 
-Use Case #2: User Configuration and Transmission
+`Use Case #2`: User Configuration and Transmission
 The system will monitor the KeyPad for user input. It must allow the user to configure the High Limit (LH) and the Low Limit (LL) for the monitored sensor data using dedicated control buttons. Furthermore, upon a specific key press (e.g., an 'Enter' key), the system must transmit the current sensor reading to the external host via the UART interface.
 
 Native C programming must be used to complete the project; no external libraries or Arduino-based code may be used. 
@@ -62,7 +62,7 @@ Keypad ..> HW_Defs : Includes
 
 ```
 
-### Assumptions & Constraints
+## Assumptions & Constraints
 ### Assumptions
 * **Microcontroller:** The code is written for an **AVR ATmega328P** microcontroller.
 * **System Clock:** The system clock frequency (`F_CPU`) is **16MHz**. This is critical for `_delay_ms()` timing and the ADC prescaler settings.
