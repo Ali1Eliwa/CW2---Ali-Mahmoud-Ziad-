@@ -220,7 +220,7 @@ package "Configuration" {
 ```
 
 ### Configuration
-All hardware and application-level constants are defined in Hardware_Defs.h for easy configuration.| Name | Value range | Description |
+All hardware and application-level constants are defined in Hardware_Defs.h for easy configuration.
 | Name | Value | Description |
 |:---|:---|:---|
 | *`LCD Pins`* | | |
