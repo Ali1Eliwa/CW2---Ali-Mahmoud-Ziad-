@@ -15,11 +15,11 @@ This document provides the detailed software design for the "Human Machine Inter
 
 This project aims to build a reliable electronic system that uses the UART communication link to send and receive data between its main chip (the microcontroller) and an outside device like a computer. The system has three main goals:
 
-Read and Show Data: The system will constantly take an analog reading (like voltage) using the ADC and show the result on the LCD screen.
+1. Read and Show Data: The system will constantly take an analog reading (like voltage) using the ADC and show the result on the LCD screen.
 
-Allow User Control: The system will watch the KeyPad for button presses, specifically to let the user press a button to send the current reading to the computer.
+2 Allow User Control: The system will watch the KeyPad for button presses, specifically to let the user press a button to send the current reading to the computer.
 
-Send Data Out: The system will use UART to dependably send the prepared data to the computer when the user triggers it.
+3. Send Data Out: The system will use UART to dependably send the prepared data to the computer when the user triggers it.
 
 ### Scope
 
@@ -81,7 +81,11 @@ The system runs on one continuous, loop that manages all its core activities. Th
 
 3. Send Data if Triggered: If the user presses the special send button on the KeyPad, the system uses UART to immediately send the current sensor reading to the computer.
 ## Implementation of the Module
-This chapter discusses the detailed design of the module.
+We're building this project using a modular design. This means we split the code into logical files to keep everything neat and organized. This approach separates the hardware details from the main program logic.
+
+The system is organized into two main sections (layers):
+
+Low-Level Drivers (MCAL): This section handles direct communication with the chip's internal parts, like the UART, ADC, and I/O pins (DIO). It gives us a clean way to talk to the hardware.
 
 ## Integration and Configuration
 ### Static Files
