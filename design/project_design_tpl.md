@@ -80,13 +80,19 @@ This chapter discusses the detailed design of the module.
 
 ## Integration and Configuration
 ### Static Files
-Typically a module consists of C and H files but other file types may exist. List all files that form this module
-
-| File name | Contents                             |
-|-----------|--------------------------------------|
-| abc_xxx.c | Source code file, add detail         |
-| abc.h     | Export Interface file                |
-| abci.h    | Import and Module Configuration file |
+All source and header files that comprise the project are listed below.
+| File name | Contents |
+| :--- | :--- |
+| **HMI\_Project.ino** | Main application logic (`setup()` / `loop()`), input processing, and display control. |
+| **Hardware\_Defs.h** | Central definitions for all hardware pins, ports, and ADC thresholds. |
+| **Adc.h** | Exported interface for the ADC driver. |
+| **Adc.ino** | Implementation of the ADC driver (init and read functions). |
+| **Lcd.h** | Exported interface for the 16x2 LCD driver. |
+| **Lcd.ino** | Implementation of the 4-bit LCD driver. |
+| **Keypad.h** | Exported interface for the analog keypad driver. |
+| **Keypad.ino** | Implementation of the keypad driver (maps ADC values to key presses). |
+| **Utils.h** | Exported interface for utility functions. |
+| **Utils.ino** | Implementation of `Simple_Itoa` utility function. |
 
 ### Include Structure
 
