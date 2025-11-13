@@ -73,8 +73,13 @@ Dependencies: No external libraries or Arduino-specific functions are permitted.
 Development Tools: Code must be managed in a Git repository, and this design document must use PlantUML for diagrams.
 
 ## Functional Description
-The following chapter describes the software functionality.  The following is a list of suggested sections to be considered for inclusion.
+The system runs on one continuous, loop that manages all its core activities. This loop has three primary jobs:
 
+1. Check Sensor & Update Screen: The system constantly reads the sensor data using the ADC. It quickly shows this new value on the LCD screen.
+
+2. Look for Button Presses: It continually checks the KeyPad to see if the user pressed a button, especially the buttons used to set the High and Low limits for the sensor.
+
+3. Send Data if Triggered: If the user presses the special send button on the KeyPad, the system uses UART to immediately send the current sensor reading to the computer.
 ## Implementation of the Module
 This chapter discusses the detailed design of the module.
 
