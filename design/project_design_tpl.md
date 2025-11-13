@@ -223,7 +223,7 @@ package "Configuration" {
 All hardware and application-level constants are defined in Hardware_Defs.h for easy configuration.| Name | Value range | Description |
 | Name | Value | Description |
 |:---|:---|:---|
-| *LCD Pins* | | |
+| *`LCD Pins`* | | |
 | LCD_RS_PORT | PORTB | Port for LCD Register Select |
 | LCD_RS_PIN | 0 (PB0) | Pin for LCD Register Select |
 | LCD_E_PORT | PORTB | Port for LCD Enable |
@@ -233,13 +233,13 @@ All hardware and application-level constants are defined in Hardware_Defs.h for 
 | LCD_D5_PIN | 5 (PD5) | Data Line 5 |
 | LCD_D6_PIN | 6 (PD6) | Data Line 6 |
 | LCD_D7_PIN | 7 (PD7) | Data Line 7 |
-| *LED Pin* | | |
+| *'LED Pin'* | | |
 | LED_PORT | PORTD | Port for the Alarm LED |
 | LED_PIN | 3 (PD3) | Pin for the Alarm LED |
-| *ADC Channels* | | |
+| *'ADC Channels'* | | |
 | KEYPAD_ADC_CHANNEL | 0 | ADC channel for the analog keypad |
 | POT_ADC_CHANNEL | 2 | ADC channel for the potentiometer |
-| *Keypad Thresholds*| | ADC values for key detection |
+| *'Keypad Thresholds'*| | ADC values for key detection |
 | KEY_ADC_RIGHT | 50 | Threshold for RIGHT key (0-49) |
 | KEY_ADC_UP | 195 | Threshold for UP key (50-194) |
 | KEY_ADC_DOWN | 380 | Threshold for DOWN key (195-379) |
