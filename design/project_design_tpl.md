@@ -82,6 +82,7 @@ The system runs on one continuous, loop that manages all its core activities. Th
 3. Send Data if Triggered: If the user presses the special send button on the KeyPad, the system uses UART to immediately send the current sensor reading to the computer.
 
 #### Application Logic Flow
+```plantuml
 @startuml
 title HMI Application Main Loop Logic
 
@@ -138,6 +139,7 @@ endwhile
 
 stop
 @enduml
+```
 
 ## Implementation of the Module
 We're building this project using a modular design. This means we split the code into logical files to keep everything neat and organized. This approach separates the hardware details from the main program logic.
