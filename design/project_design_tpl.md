@@ -8,9 +8,8 @@
 
 ## Introduction
 
-Provide an overview of the entire document:
 
-* Identify the system/product using any applicable names and/or version numbers.
+This document provides the detailed software design for the "Human Machine Interface" project, which is Element 2 of the KH5023FTE Embedded System Design & Development module coursework. The system is developed for the AVR ATmega328P microcontroller.
 
 ### Purpose
 
