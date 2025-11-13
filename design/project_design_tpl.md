@@ -80,6 +80,65 @@ The system runs on one continuous, loop that manages all its core activities. Th
 2. Look for Button Presses: It continually checks the KeyPad to see if the user pressed a button, especially the buttons used to set the High and Low limits for the sensor.
 
 3. Send Data if Triggered: If the user presses the special send button on the KeyPad, the system uses UART to immediately send the current sensor reading to the computer.
+
+#### Application Logic Flow
+@startuml
+title HMI Application Main Loop Logic
+
+start
+:Initialize LED Pin (Output);
+:Initialize ADC (adc_init);
+:Initialize LCD (lcd_init);
+:Store last_key = KEY_NONE;
+
+while (true) is (Main Loop)
+    :Read Potentiometer Value
+    (pot_value = adc_read(POT_ADC_CHANNEL));
+    :Read Keypad Value
+    (key_press = get_keypad_press());
+    
+    if (key_press != KEY_NONE AND 
+        key_press != last_key) then (yes)
+      :Handle New Key Press;
+      if (key_press == KEY_UP) then (yes)
+        :high_limit += 50;
+        if (high_limit > 1050) then (yes)
+            :high_limit = 0;
+        endif
+      else if (key_press == KEY_DOWN) then (yes)
+        :low_limit += 50;
+        if (low_limit > 1050) then (yes)
+            :low_limit = 0;
+        endif
+      endif
+      :Debounce delay (150ms);
+      :Update last_key = key_press;
+    else (no)
+      :Update last_key = key_press;
+    endif
+    
+    :Process Alarm Logic;
+    if (pot_value > high_limit OR
+        pot_value < low_limit) then (yes)
+        :Turn LED ON;
+        :Set status to "NOK";
+    else (no)
+        :Turn LED OFF;
+        :Set status to "OK";
+    endif
+    
+    :Update LCD Display;
+    note right
+        - Row 0: "POT: [value] [status]"
+        - Row 1: "L: [low_limit] H: [high_limit]"
+    end note
+    
+    :Short delay (100ms);
+endwhile
+
+stop
+@enduml
+
 ## Implementation of the Module
 We're building this project using a modular design. This means we split the code into logical files to keep everything neat and organized. This approach separates the hardware details from the main program logic.
 
