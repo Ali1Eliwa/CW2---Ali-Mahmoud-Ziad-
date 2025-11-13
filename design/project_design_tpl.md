@@ -80,12 +80,24 @@ Keypad ..> HW_Defs : Includes
 
 ## Functional Description
 The system runs on one continuous, loop that manages all its core activities. This loop has three primary jobs:
-
 1. Check Sensor & Update Screen: The system constantly reads the sensor data using the ADC. It quickly shows this new value on the LCD screen.
-
 2. Look for Button Presses: It continually checks the KeyPad to see if the user pressed a button, especially the buttons used to set the High and Low limits for the sensor.
-
 3. Send Data if Triggered: If the user presses the special send button on the KeyPad, the system uses UART to immediately send the current sensor reading to the computer.
+
+#### This section provides a more detailed illustration of the application's logic.
+### 1. One-Time Setup
+* Initialize the LCD, ADC, and LED.
+* Set the default **High Limit** (500) and **Low Limit** (100).
+
+### 2. The Main Loop (Repeats Forever)
+* **Read Inputs:** Get the current sensor value (from the potentiometer) and check which button (if any) is pressed.
+* **Process Commands:**
+    * If the **UP** button is pressed, increase the **High Limit** by 50 (wrapping to 0 after 1050).
+    * If the **DOWN** button is pressed, increase the **Low Limit** by 50 (wrapping to 0 after 1050).
+* **Check Alarm:** Compare the sensor value to the limits. If the value is **outside** the `Low Limit` to `High Limit` range, set an alarm.
+* **Show Status:**
+    * Turn the **LED ON** if the alarm is set, otherwise turn it **OFF**.
+    * Update the **LCD** to show the current sensor value, the (OK/NOK) status, and the current high/low limits.
 
 #### Application Logic Flow
 ```plantuml
