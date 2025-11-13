@@ -29,44 +29,32 @@ Send Data Out: The system will use UART to dependably send the prepared data to 
 
 This section describes where this module resides in the context of the software architecture
 ```plantuml
-@startuml
-rectangle UartApp #orange {
-  rectangle Application
-    rectangle MCU #green {
-        rectangle LCD
-        rectangle KeyPad
-    }
 
-    rectangle MCAL #skyblue {
-            rectangle ADC
-            rectangle UART
-            rectangle DIO
-            rectangle Register
-    }
-    
-    Application -[hidden]-> MCU
-    MCU -[hidden]-> MCAL
-}
+@startuml
+title HMI Project - Software Component Diagram
+!theme spacelab
+
+component [Main App (HMI_Project.ino)] as Main
+component [LCD Driver (Lcd.ino)] as LCD
+component [ADC Driver (Adc.ino)] as ADC
+component [Keypad Driver (Keypad.ino)] as Keypad
+component [Utilities (Utils.ino)] as Utils
+database [Hardware_Defs.h] as HW_Defs
+
+Main --> LCD : Uses
+Main --> ADC : Uses (for POT)
+Main --> Keypad : Uses
+Main --> Utils : Uses
+Main ..> HW_Defs : Includes
+
+Keypad --> ADC : Uses
+Keypad ..> HW_Defs : Includes
 @enduml
 
 ```
 
 ### Assumptions & Constraints
 Indicate constraints of the low level design and any assumptions appropriate for the design.
-
-```plantuml
-@startuml
-(*) --> init
---> configure
-if value > 15
-  --> increment value
-  --> (*)
-else
-  --> decrement value
-  --> (*)
-endif
-@enduml
-```
 
 ## Functional Description
 The following chapter describes the software functionality.  The following is a list of suggested sections to be considered for inclusion.
@@ -89,17 +77,48 @@ Typically a module consists of C and H files but other file types may exist. Lis
 If there is a complex file structure e.g. more than one c-file or more than two h-files use a diagram to explain the relationship between the source and dependent include files.
 
 ```plantuml
+
 @startuml
-package "pkg" {
-    [ABC_Init.c].>[ADC.h] : includes
-    [ABC_Init.c]...>[ABCi.h]
-    [ABC_Task.c]...>[ADC.h]
-    [ABC_Task.c]...>[ABCi.h] : includes
-    interface Interf3
-    note left of ABC_Task.c: A top note
-    ABC_Init.c ..> Interf3 : internal interface
+title File Include Structure
+
+package "Application" {
+    component [HMI_Project.ino]
 }
+
+package "Drivers" {
+    component [Keypad.ino]
+    component [Lcd.ino]
+    component [Adc.ino]
+    component [Utils.ino]
+}
+
+package "Interfaces" {
+    header [Keypad.h]
+    header [Lcd.h]
+    header [Adc.h]
+    header [Utils.h]
+}
+
+package "Configuration" {
+    header [Hardware_Defs.h]
+}
+
+' --- Relationships ---
+[HMI_Project.ino] ..> [Hardware_Defs.h] : includes
+[HMI_Project.ino] ..> [Adc.h] : includes
+[HMI_Project.ino] ..> [Lcd.h] : includes
+[HMI_Project.ino] ..> [Keypad.h] : includes
+[HMI_Project.ino] ..> [Utils.h] : includes
+
+[Keypad.ino] ..> [Keypad.h] : includes
+[Keypad.ino] ..> [Hardware_Defs.h] : includes
+[Keypad.ino] ..> [Adc.h] : includes
+
+[Lcd.ino] ..> [Lcd.h] : includes
+[Adc.ino] ..> [Adc.h] : includes
+[Utils.ino] ..> [Utils.h] : includes
 @enduml
+
 ```
 
 ### Configuration
