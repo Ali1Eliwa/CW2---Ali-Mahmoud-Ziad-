@@ -63,7 +63,14 @@ Keypad ..> HW_Defs : Includes
 ```
 
 ### Assumptions & Constraints
-Indicate constraints of the low level design and any assumptions appropriate for the design.
+Hardware: The target microcontroller is an AVR ATmega328P operating at a clock speed of 16 MHz.
+
+
+Programming Language: The project must be implemented strictly in Native C.
+
+Dependencies: No external libraries or Arduino-specific functions are permitted.
+
+Development Tools: Code must be managed in a Git repository, and this design document must use PlantUML for diagrams.
 
 ## Functional Description
 The following chapter describes the software functionality.  The following is a list of suggested sections to be considered for inclusion.
