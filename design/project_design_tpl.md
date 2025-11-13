@@ -13,6 +13,13 @@ This document provides the detailed software design for the "Human Machine Inter
 
 ### Purpose
 
+This project aims to build a reliable electronic system that uses the UART communication link to send and receive data between its main chip (the microcontroller) and an outside device like a computer. The system has three main goals:
+
+Read and Show Data: The system will constantly take an analog reading (like voltage) using the ADC and show the result on the LCD screen.
+
+Allow User Control: The system will watch the KeyPad for button presses, specifically to let the user press a button to send the current reading to the computer.
+
+Send Data Out: The system will use UART to dependably send the prepared data to the computer when the user triggers it.
 
 ### Scope
 
