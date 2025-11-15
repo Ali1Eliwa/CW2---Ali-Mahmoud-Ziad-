@@ -26,9 +26,10 @@ Test Cases are developed in **[Robot Framework](https://robotframework.org/)** T
 
 ## 5. Video Demonstration
 
-[recorded_video](./video/sample_video.mp4)
+[recorded_video](video/Project_Test.mp4)
 
 
 ## 6. Design
 
 [design_document](design/project_design_tpl.md)
+
