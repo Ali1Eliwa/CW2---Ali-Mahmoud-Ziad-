@@ -193,7 +193,7 @@ All source and header files that comprise the project are listed below.
 
 ### Include Structure
 
-If there is a complex file structure e.g. more than one c-file or more than two h-files use a diagram to explain the relationship between the source and dependent include files.
+This diagram illustrates the project's file include dependencies, showing how the main application (HMI_Project.ino) and various driver modules (.ino files) depend on interface (.h files) and configuration headers.
 
 ```plantuml
 
